@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+
+        
+          <label >product name</label>
+          <input type="text"  id="products"  placeholder="Enter email">
+          
+
+        
+          <label >price</label>
+          <input type="number" class="form-control" id="price" placeholder="Password">
+
+        <input id="image" type="file" name="file" onchange=handleImage(name) >
+        <input id="addUser" type="submit" class="btn btn-primary">Submit</input>
+
+
+      <script>
+     const handleImage =event=>{
+         console.log(event.target.value);
+
+     }
+        //post data to the server
+        const btnAddUser = document.getElementById('addUser');
+        btnAddUser.addEventListener('click',()=>{
+            const name=document.getElementById('products').value;
+            const price=document.getElementById('price').value;
+            const image=document.getElementById('image').value;
+            const user={name,price};
+           // console.log(image);
+         //   console.log(user);
+          //post
+          fetch('http://localhost:4000/addProduct',{
+              method:'POST',
+              body:JSON.stringify(user),
+              headers:{
+                  "content-type": "Application/json; charset=UTF-8"
+              }
+          })
+          .then(res => res.json())
+          .then(data => {
+           // document.getElementById('userName').innerText=data.name;
+          })
+         })
+        
+    </script>
+</body>
+</html>
